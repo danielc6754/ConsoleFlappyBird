@@ -92,12 +92,16 @@ protected:
 				nSection++;
 			}
 
+			int nBirdX = (int)(ScreenWidth() / 3);
+
 			// Collision Detection
 			if (fBirdPosition < 2)
 				fBirdPosition = 2;
-			bHasCollided = fBirdPosition > ScreenHeight() - 2;
-
-			int nBirdX = (int)(ScreenWidth() / 3);
+			bHasCollided = fBirdPosition > ScreenHeight() - 2 ||
+				m_bufScreen[(int)(fBirdPosition + 0) * ScreenWidth() + nBirdX].Char.UnicodeChar != L' ' ||
+				m_bufScreen[(int)(fBirdPosition + 1) * ScreenWidth() + nBirdX].Char.UnicodeChar != L' ' || 
+				m_bufScreen[(int)(fBirdPosition + 0) * ScreenWidth() + nBirdX + 5].Char.UnicodeChar != L' ' || 
+				m_bufScreen[(int)(fBirdPosition + 1) * ScreenWidth() + nBirdX + 5].Char.UnicodeChar != L' ';
 
 			// Draw Bird
 			if (fBirdVelocity > 0) {
